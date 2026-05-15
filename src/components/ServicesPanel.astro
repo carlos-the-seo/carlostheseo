@@ -177,6 +177,11 @@ const { services } = Astro.props as { services: Service[] };
   .svc-mobile-panel[data-active="true"]  { display: block; animation: fadeIn 0.2s ease; }
   .svc-mobile-panel[data-active="false"] { display: none; }
 
+  /* Always hide mobile panels on desktop regardless of active state */
+  @media (min-width: 768px) {
+    .svc-mobile-panel { display: none !important; }
+  }
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(6px); }
     to   { opacity: 1; transform: translateY(0); }
