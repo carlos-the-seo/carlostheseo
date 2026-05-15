@@ -1,0 +1,71 @@
+---
+const navLinks = [
+  { label: 'Services', href: '/services' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Blog', href: '/blog' },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 border-b border-[#1e1e30] bg-[#08080f]/90 backdrop-blur-sm">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="text-white font-semibold text-lg tracking-tight hover:text-[#f97316] transition-colors">
+      Carlos<span class="text-[#f97316]">TheSEO</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      {navLinks.map(({ label, href }) => (
+        <a
+          href={href}
+          class={`text-sm font-medium transition-colors ${
+            pathname === href
+              ? 'text-white'
+              : 'text-[#64748b] hover:text-white'
+          }`}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+
+    <a
+      href="/contact"
+      class="hidden md:inline-flex items-center gap-2 bg-[#f97316] hover:bg-[#ea6c0a] text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
+    >
+      Work With Me
+    </a>
+
+    <!-- Mobile menu button -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden text-[#64748b] hover:text-white transition-colors"
+      aria-label="Toggle menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-[#1e1e30] bg-[#08080f] px-6 py-4 flex flex-col gap-4">
+    {navLinks.map(({ label, href }) => (
+      <a href={href} class="text-sm font-medium text-[#64748b] hover:text-white transition-colors">
+        {label}
+      </a>
+    ))}
+    <a href="/contact" class="inline-flex justify-center bg-[#f97316] text-white text-sm font-semibold px-4 py-2 rounded-lg">
+      Work With Me
+    </a>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>

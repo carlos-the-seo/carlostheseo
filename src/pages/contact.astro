@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm';
+---
+
+<Layout
+  title="Work With Me"
+  description="Not a pitch — a real conversation about what's broken with your SEO and what it takes to fix it properly."
+>
+  <section class="pt-36 pb-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Left: Context -->
+        <div class="lg:sticky lg:top-28">
+          <p class="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-4">Contact</p>
+          <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-5">
+            Let's talk about<br />your SEO.
+          </h1>
+          <p class="text-[#64748b] leading-relaxed mb-10">
+            Not a discovery call. A real conversation about where you are, what's broken, and what it actually takes to fix it.
+          </p>
+
+          <!-- What to expect -->
+          <div class="space-y-5 mb-12">
+            {[
+              {
+                title: 'I read every message',
+                desc: 'No VA, no sales team. You\'re talking to me directly.',
+              },
+              {
+                title: 'I respond within 1 business day',
+                desc: 'If we\'re a fit, we\'ll schedule a call. If not, I\'ll tell you honestly.',
+              },
+              {
+                title: 'No pitch decks',
+                desc: 'I\'ll ask a few questions, look at your site, and tell you what I see.',
+              },
+            ].map(({ title, desc }) => (
+              <div class="flex gap-4">
+                <div class="mt-0.5 w-5 h-5 rounded-full bg-[#f97316]/10 flex items-center justify-center shrink-0">
+                  <span class="text-[#f97316] text-xs">✓</span>
+                </div>
+                <div>
+                  <p class="text-white text-sm font-medium mb-0.5">{title}</p>
+                  <p class="text-[#64748b] text-sm">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Direct contact -->
+          <div class="border-t border-[#1e1e30] pt-8">
+            <p class="text-xs text-[#334155] uppercase tracking-wider mb-4 font-medium">Prefer email?</p>
+            <a
+              href="mailto:seo@marketingempiregroup.com"
+              class="text-sm text-[#64748b] hover:text-[#f97316] transition-colors font-mono"
+            >
+              seo@marketingempiregroup.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-8">
+          <ContactForm client:load />
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    id: 'seo-audits',
+    icon: '◎',
+    title: 'SEO Audits',
+    tagline: 'Know exactly what\'s wrong — and what to fix first.',
+    description: 'Most audits hand you a spreadsheet of issues without telling you which ones actually matter. I pull data from Ahrefs, Google Search Console, GA4, and Search Atlas to build a prioritized diagnosis — ranked by revenue impact, not just technical severity.',
+    deliverables: [
+      'Multi-source data pull (Ahrefs + GSC + GA4 + Search Atlas)',
+      'Prioritized issue list ranked by impact, not volume',
+      'AI Overview and SERP feature opportunity analysis',
+      'Competitor gap breakdown',
+      'Actionable next steps with implementation order',
+      '.docx deliverable you can hand to any dev or copywriter',
+    ],
+    bestFor: 'Businesses that have been doing SEO but aren\'t sure why it\'s not working.',
+  },
+  {
+    id: 'content-pipeline',
+    icon: '⟳',
+    title: 'Content Pipeline',
+    tagline: 'A system that produces — not a calendar that stalls.',
+    description: 'A content calendar isn\'t a pipeline. I build the repeatable system: keyword-mapped topics, structured briefs, humanized drafts that pass both AI detectors and reader scrutiny, internal linking logic, and Google Docs delivery. It runs every month without starting from scratch.',
+    deliverables: [
+      'Keyword-mapped content strategy by service or topic cluster',
+      'Gate 1 / Gate 2 review system (humanize → optimize → link)',
+      'Structured briefs with search intent and outline',
+      'Final drafts synced to Google Docs',
+      'Internal linking recommendations per post',
+      'Editorial calendar with status tracking',
+    ],
+    bestFor: 'Service businesses and agencies that need consistent content without hiring a full content team.',
+  },
+  {
+    id: 'schema-technical',
+    icon: '{}',
+    title: 'Schema & Technical SEO',
+    tagline: 'Show up where your competitors haven\'t figured out yet.',
+    description: 'AI Overviews, rich results, and knowledge panels don\'t happen by accident. I build the JSON-LD markup — FAQ, Article, Organization, LocalBusiness, Product, Service — and deliver it implementation-ready with WordPress PHP or direct CMS integration. Every file validated before delivery.',
+    deliverables: [
+      '9-file JSON-LD package per engagement',
+      'Schema types: FAQ, Article, Organization, LocalBusiness, Service, BreadcrumbList',
+      'WordPress PHP implementation file',
+      'Google Rich Results validation before handoff',
+      'Technical audit: crawl errors, Core Web Vitals, indexation issues',
+      'Site architecture and internal linking review',
+    ],
+    bestFor: 'Sites with solid content that aren\'t showing up in AI Overviews or rich results.',
+  },
+  {
+    id: 'ai-seo-ops',
+    icon: '◈',
+    title: 'AI-Powered SEO Ops',
+    tagline: 'SEO that runs while you\'re doing everything else.',
+    description: 'I build and deploy monitoring systems, automated briefs, and AI-assisted workflows tailored to your business. Think Sentinel-style daily monitoring, pre-built alert logic, and pipeline automation — the infrastructure that keeps your SEO moving without a full agency on retainer.',
+    deliverables: [
+      'Custom monitoring agent setup (Sentinel-style)',
+      'Daily or weekly automated SEO brief delivery to Slack or email',
+      'Ranking movement alerts with context, not just data',
+      'Content opportunity detection from GSC query data',
+      'MCP stack configuration (GA4, GSC, Ahrefs integration)',
+      'Workflow documentation so your team can maintain it',
+    ],
+    bestFor: 'Growing businesses that want SEO running in the background without managing it daily.',
+  },
+  {
+    id: 'local-location',
+    icon: '⊙',
+    title: 'Local & Location SEO',
+    tagline: 'Rank in every market you serve — not just your hometown.',
+    description: 'Multi-location businesses lose visibility because they treat location pages like duplicates. I build programmatic service × location pages with real local signals, proper schema, and content that Google treats as unique — so you rank in Austin, Dallas, and Houston instead of just your registered address.',
+    deliverables: [
+      'Service × location page strategy and architecture',
+      'Programmatic page templates with local signal integration',
+      'LocalBusiness + Service schema per location',
+      'Google Business Profile optimization guidance',
+      'Local citation and NAP consistency audit',
+      'Internal linking structure across location pages',
+    ],
+    bestFor: 'Service area businesses, franchises, and multi-location companies that need to rank city by city.',
+  },
+  {
+    id: 'ongoing-monitoring',
+    icon: '↗',
+    title: 'Ongoing Monitoring',
+    tagline: 'Know about problems before your clients do.',
+    description: 'Rankings move. Crawl errors happen. Pages drop out of the index. Ongoing monitoring means you\'re not finding out about it weeks later in a quarterly report — you\'re finding out the morning it happens, with context on why and what to do.',
+    deliverables: [
+      'Daily ranking and traffic monitoring',
+      'Weekly brief with movements, opportunities, and flags',
+      'Crawl error and indexation monitoring',
+      'Core Web Vitals tracking',
+      'Monthly strategy review with data-backed priorities',
+      'Direct Slack or email escalation for urgent issues',
+    ],
+    bestFor: 'Businesses that have built their SEO foundation and need it protected and grown.',
+  },
+];
+---
+
+<Layout
+  title="Services"
+  description="SEO audits, content pipelines, schema markup, AI-powered monitoring, and local SEO — built as systems, not one-off deliverables."
+>
+
+  <!-- Header -->
+  <section class="pt-36 pb-16 px-6">
+    <div class="max-w-6xl mx-auto max-w-2xl">
+      <p class="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-4">Services</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-5">
+        What I build — and how it works.
+      </h1>
+      <p class="text-[#64748b] text-lg leading-relaxed">
+        Every engagement is scoped around a real output, not a retainer that auto-renews. Here's exactly what each service includes.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services list -->
+  <section class="px-6 pb-24">
+    <div class="max-w-6xl mx-auto space-y-6">
+      {services.map(({ id, icon, title, tagline, description, deliverables, bestFor }) => (
+        <div id={id} class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-8 md:p-10 hover:border-[#f97316]/20 transition-colors group">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Left -->
+            <div class="lg:col-span-1">
+              <span class="text-2xl text-[#f97316]/60 font-mono group-hover:text-[#f97316] transition-colors mb-4 block">{icon}</span>
+              <h2 class="text-white font-bold text-xl mb-2">{title}</h2>
+              <p class="text-[#f97316] text-sm font-medium mb-4">{tagline}</p>
+              <p class="text-[#64748b] text-sm leading-relaxed mb-6">{description}</p>
+              <div class="bg-[#0a0a12] border border-[#1e1e30] rounded-xl p-4">
+                <p class="text-xs font-semibold text-[#334155] uppercase tracking-wider mb-2">Best for</p>
+                <p class="text-[#64748b] text-xs leading-relaxed">{bestFor}</p>
+              </div>
+            </div>
+
+            <!-- Right: Deliverables -->
+            <div class="lg:col-span-2">
+              <p class="text-xs font-semibold text-[#334155] uppercase tracking-wider mb-5">What's included</p>
+              <ul class="space-y-3">
+                {deliverables.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <span class="mt-0.5 w-4 h-4 rounded-full bg-[#f97316]/10 flex items-center justify-center shrink-0">
+                      <span class="text-[#f97316] text-[9px]">✓</span>
+                    </span>
+                    <span class="text-[#94a3b8] text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-8 pt-6 border-t border-[#1e1e30]">
+                <a
+                  href={`/contact?service=${encodeURIComponent(title)}`}
+                  class="inline-flex items-center gap-2 text-sm font-semibold text-[#f97316] hover:text-[#ea6c0a] transition-colors"
+                >
+                  Inquire about {title}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M2 7h10M8 3l4 4-4 4" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-6 pb-24">
+    <div class="max-w-6xl mx-auto">
+      <div class="relative bg-[#0f0f1a] border border-[#1e1e30] rounded-3xl px-8 md:px-20 py-16 text-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#f97316]/6 via-transparent to-indigo-500/4 pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-[#f97316]/8 rounded-full blur-[60px] pointer-events-none"></div>
+        <div class="relative">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Not sure which one fits?</h2>
+          <p class="text-[#64748b] mb-8 max-w-md mx-auto">
+            Tell me what's going on. I'll tell you honestly what you need — even if it's not one of these.
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 bg-[#f97316] hover:bg-[#ea6c0a] text-white font-semibold px-8 py-4 rounded-xl transition-colors"
+          >
+            Start the conversation
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M2 7h10M8 3l4 4-4 4" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
