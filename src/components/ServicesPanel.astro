@@ -1,0 +1,212 @@
+---
+interface Service {
+  id: string;
+  icon: string;
+  title: string;
+  tagline: string;
+  description: string;
+  deliverables: string[];
+  bestFor: string;
+}
+
+const { services } = Astro.props as { services: Service[] };
+---
+
+<div class="w-full">
+
+  <!-- Mobile: horizontal pill tabs -->
+  <div class="flex md:hidden overflow-x-auto gap-2 pb-4 mb-6 scrollbar-hide">
+    {services.map((svc, i) => (
+      <button
+        data-svc-btn={svc.id}
+        data-active={i === 0 ? 'true' : 'false'}
+        class="svc-pill shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-colors border"
+      >
+        {svc.title}
+      </button>
+    ))}
+  </div>
+
+  <!-- Desktop: split panel -->
+  <div class="hidden md:grid grid-cols-[280px_1fr] gap-0 min-h-[560px] bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl overflow-hidden">
+
+    <!-- Left: tab list -->
+    <div class="border-r border-[#1e1e30] py-2">
+      {services.map((svc, i) => (
+        <button
+          data-svc-btn={svc.id}
+          data-active={i === 0 ? 'true' : 'false'}
+          class="svc-tab w-full text-left px-6 py-5 flex items-start gap-4 transition-all group relative"
+        >
+          <span class="svc-tab-bar absolute left-0 top-0 bottom-0 w-[3px] rounded-r transition-all duration-200" />
+          <span class="svc-tab-num text-xs font-mono mt-0.5 shrink-0 transition-colors">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div>
+            <p class="svc-tab-title text-sm font-semibold leading-tight transition-colors">{svc.title}</p>
+            <p class="svc-tab-tagline text-xs text-[#475569] mt-1 leading-snug">{svc.tagline}</p>
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <!-- Right: all panels in HTML (SEO-safe) -->
+    <div class="relative">
+      {services.map((svc, i) => (
+        <div
+          data-svc-panel={svc.id}
+          data-active={i === 0 ? 'true' : 'false'}
+          class="svc-desktop-panel absolute inset-0 p-10 flex flex-col overflow-y-auto"
+        >
+          <div class="flex items-start gap-4 mb-6">
+            <span class="text-2xl font-mono text-[#f97316]/40 mt-1">{svc.icon}</span>
+            <div>
+              <h2 class="text-2xl font-bold text-white mb-1">{svc.title}</h2>
+              <p class="text-[#f97316] text-sm font-medium">{svc.tagline}</p>
+            </div>
+          </div>
+
+          <p class="text-[#64748b] text-sm leading-relaxed mb-8">{svc.description}</p>
+
+          <div class="grid grid-cols-1 xl:grid-cols-[1fr_220px] gap-8 flex-1">
+            <div>
+              <p class="text-xs font-semibold text-[#334155] uppercase tracking-wider mb-4">What's included</p>
+              <ul class="grid grid-cols-1 gap-2.5">
+                {svc.deliverables.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <span class="mt-0.5 w-4 h-4 rounded-full bg-[#f97316]/10 flex items-center justify-center shrink-0">
+                      <span class="text-[#f97316] text-[9px]">✓</span>
+                    </span>
+                    <span class="text-[#94a3b8] text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <div class="bg-[#0a0a12] border border-[#1e1e30] rounded-xl p-4">
+                <p class="text-xs font-semibold text-[#334155] uppercase tracking-wider mb-2">Best for</p>
+                <p class="text-[#64748b] text-xs leading-relaxed">{svc.bestFor}</p>
+              </div>
+              <a
+                href={`/contact?service=${encodeURIComponent(svc.title)}`}
+                class="inline-flex items-center justify-center gap-2 bg-[#f97316] hover:bg-[#ea6c0a] text-white text-sm font-semibold px-5 py-3 rounded-xl transition-colors mt-auto"
+              >
+                Inquire about this
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M2 7h10M8 3l4 4-4 4" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Mobile: all cards in HTML (SEO-safe) -->
+  {services.map((svc, i) => (
+    <div
+      data-svc-panel={svc.id}
+      data-active={i === 0 ? 'true' : 'false'}
+      class="svc-mobile-panel md:hidden bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-6"
+    >
+      <div class="mb-5">
+        <h2 class="text-xl font-bold text-white mb-1">{svc.title}</h2>
+        <p class="text-[#f97316] text-sm font-medium">{svc.tagline}</p>
+      </div>
+      <p class="text-[#64748b] text-sm leading-relaxed mb-6">{svc.description}</p>
+
+      <div class="bg-[#0a0a12] border border-[#1e1e30] rounded-xl p-4 mb-6">
+        <p class="text-xs font-semibold text-[#334155] uppercase tracking-wider mb-2">Best for</p>
+        <p class="text-[#64748b] text-xs leading-relaxed">{svc.bestFor}</p>
+      </div>
+
+      <p class="text-xs font-semibold text-[#334155] uppercase tracking-wider mb-4">What's included</p>
+      <ul class="space-y-2.5 mb-6">
+        {svc.deliverables.map((item) => (
+          <li class="flex items-start gap-3">
+            <span class="mt-0.5 w-4 h-4 rounded-full bg-[#f97316]/10 flex items-center justify-center shrink-0">
+              <span class="text-[#f97316] text-[9px]">✓</span>
+            </span>
+            <span class="text-[#94a3b8] text-sm leading-relaxed">{item}</span>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={`/contact?service=${encodeURIComponent(svc.title)}`}
+        class="flex items-center justify-center gap-2 bg-[#f97316] hover:bg-[#ea6c0a] text-white text-sm font-semibold px-5 py-3 rounded-xl transition-colors"
+      >
+        Inquire about {svc.title}
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M2 7h10M8 3l4 4-4 4" />
+        </svg>
+      </a>
+    </div>
+  ))}
+
+</div>
+
+<style>
+  /* Desktop tab button states */
+  .svc-tab[data-active="true"]  { background-color: #0a0a12; }
+  .svc-tab[data-active="false"]:hover { background-color: rgba(10,10,18,0.5); }
+
+  .svc-tab[data-active="true"]  .svc-tab-bar { background-color: #f97316; }
+  .svc-tab[data-active="false"] .svc-tab-bar { background-color: transparent; }
+
+  .svc-tab[data-active="true"]  .svc-tab-num { color: #f97316; }
+  .svc-tab[data-active="false"] .svc-tab-num { color: #334155; }
+
+  .svc-tab[data-active="true"]  .svc-tab-title { color: #ffffff; }
+  .svc-tab[data-active="false"] .svc-tab-title { color: #64748b; }
+
+  .svc-tab[data-active="true"]  .svc-tab-tagline { display: block; }
+  .svc-tab[data-active="false"] .svc-tab-tagline { display: none; }
+
+  /* Mobile pill states */
+  .svc-pill[data-active="true"]  { background-color: #f97316; border-color: #f97316; color: #ffffff; }
+  .svc-pill[data-active="false"] { border-color: #1e1e30; color: #64748b; }
+
+  /* Desktop panel visibility */
+  .svc-desktop-panel[data-active="true"]  { display: flex; animation: fadeIn 0.2s ease; }
+  .svc-desktop-panel[data-active="false"] { display: none; }
+
+  /* Mobile panel visibility */
+  .svc-mobile-panel[data-active="true"]  { display: block; animation: fadeIn 0.2s ease; }
+  .svc-mobile-panel[data-active="false"] { display: none; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLElement>('[data-svc-btn]');
+  const desktopPanels = document.querySelectorAll<HTMLElement>('.svc-desktop-panel');
+  const mobilePanels  = document.querySelectorAll<HTMLElement>('.svc-mobile-panel');
+  const desktopTabs   = document.querySelectorAll<HTMLElement>('.svc-tab');
+  const mobilePills   = document.querySelectorAll<HTMLElement>('.svc-pill');
+
+  function activate(id: string) {
+    // Panels
+    desktopPanels.forEach(p => p.dataset.active = p.dataset.svcPanel === id ? 'true' : 'false');
+    mobilePanels.forEach(p  => p.dataset.active = p.dataset.svcPanel === id ? 'true' : 'false');
+    // Desktop tabs
+    desktopTabs.forEach(t   => t.dataset.active = t.dataset.svcBtn   === id ? 'true' : 'false');
+    // Mobile pills
+    mobilePills.forEach(p   => p.dataset.active = p.dataset.svcBtn   === id ? 'true' : 'false');
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.svcBtn;
+      if (id) activate(id);
+    });
+  });
+</script>
