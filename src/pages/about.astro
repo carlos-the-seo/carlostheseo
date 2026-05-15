@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const stats = [
+  { value: '8', label: 'Years in digital marketing' },
+  { value: '24', label: 'Active clients monitored daily' },
+  { value: '6+', label: 'Industries served' },
+  { value: '2017', label: 'Started freelancing' },
+];
+
+const industries = [
+  'Home Services', 'Construction', 'Ecommerce', 'Restaurants',
+  'Law Firms', 'Local Service Businesses',
+];
+
+const tools = [
+  'Ahrefs', 'Google Search Console', 'GA4', 'Search Atlas',
+  'Claude AI', 'Webflow', 'Sanity', 'Basecamp',
+];
+---
+
+<Layout
+  title="About"
+  description="8 years in digital marketing. SEO consultant based in Temecula, CA building AI-powered systems for home services, construction, legal, and local businesses."
+>
+
+  <!-- Hero -->
+  <section class="pt-36 pb-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-16 items-start">
+
+        <!-- Photo column -->
+        <div class="flex flex-col items-center lg:items-start gap-6">
+          <div class="relative">
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#f97316]/20 to-indigo-500/10 blur-xl scale-105"></div>
+            <img
+              src="/carlos-headshot.jpeg"
+              alt="Carlos Morones — SEO Consultant, Temecula CA"
+              class="relative w-64 lg:w-full max-w-[320px] rounded-2xl object-cover aspect-[3/4] border border-[#1e1e30]"
+            />
+          </div>
+
+          <!-- Quick facts under photo -->
+          <div class="w-full max-w-[320px] bg-[#0f0f1a] border border-[#1e1e30] rounded-xl p-5 space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="text-[#f97316] text-sm">⊙</span>
+              <span class="text-sm text-[#94a3b8]">Temecula, CA — Southern California</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-[#f97316] text-sm">◎</span>
+              <span class="text-sm text-[#94a3b8]">8 years in digital marketing</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-[#f97316] text-sm">◈</span>
+              <span class="text-sm text-[#94a3b8]">SEO + AI Systems Consultant</span>
+            </div>
+            <div class="pt-3 border-t border-[#1e1e30]">
+              <a
+                href="/contact"
+                class="flex items-center justify-center gap-2 bg-[#f97316] hover:bg-[#ea6c0a] text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors"
+              >
+                Work With Me
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M2 7h10M8 3l4 4-4 4" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio column -->
+        <div class="pt-2">
+          <p class="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-4">About</p>
+          <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+            Carlos Morones
+          </h1>
+          <p class="text-xl text-[#f97316] font-medium mb-8">
+            SEO + AI Consultant — Temecula, CA
+          </p>
+
+          <div class="space-y-5 text-[#94a3b8] text-base leading-relaxed">
+            <p>
+              I started in audio visual production — video editing, commercials, and graphics in high school. That's where I learned what most marketers miss: <span class="text-white">if it doesn't communicate clearly, it doesn't work.</span>
+            </p>
+            <p>
+              I started freelancing in 2017 across social media, paid ads, video production, and web development. That breadth forced me to understand how every channel either feeds or fails the others. Ecommerce taught me what it means to optimize for revenue, not just traffic.
+            </p>
+            <p>
+              My first in-house role was in construction — owning the full marketing and SEO operation for a company with real stakes. No agency to blame when rankings dropped. That's where I learned how to build systems instead of just running campaigns.
+            </p>
+            <p>
+              In 2023 I moved into a dedicated SEO role at an agency, which is where I built the infrastructure I now deploy for clients: <span class="text-white">Sentinel</span> (daily monitoring across 24 clients), a <span class="text-white">38-file content pipeline</span> with a two-gate humanization process, and <span class="text-white">9-file JSON-LD schema packages</span> ready for dev handoff.
+            </p>
+            <p>
+              Now I work independently — building the SEO systems that run after most retainers expire.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="px-6 pb-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map(({ value, label }) => (
+          <div class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-6 text-center">
+            <p class="text-3xl font-bold text-[#f97316] mb-1">{value}</p>
+            <p class="text-xs text-[#475569] leading-snug">{label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="px-6 pb-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+
+        <div>
+          <p class="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-4">Industries</p>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">
+            Clients I've worked with
+          </h2>
+          <p class="text-[#64748b] text-sm leading-relaxed mb-8">
+            Eight years across freelance, in-house, and agency work means I've built SEO for businesses that actually have to show up locally, compete in crowded markets, and justify every dollar spent.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {industries.map((industry) => (
+              <span class="bg-[#0f0f1a] border border-[#1e1e30] rounded-lg px-4 py-2 text-sm text-[#94a3b8]">
+                {industry}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-4">Tools</p>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">
+            What I actually use
+          </h2>
+          <p class="text-[#64748b] text-sm leading-relaxed mb-8">
+            No vague "AI tools." Every tool in my stack is named, integrated, and doing a specific job — not just mentioned to sound current.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {tools.map((tool) => (
+              <span class="bg-[#0f0f1a] border border-[#1e1e30] rounded-lg px-4 py-2 text-sm text-[#94a3b8]">
+                {tool}
+              </span>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- What I've built -->
+  <section class="px-6 pb-20">
+    <div class="max-w-6xl mx-auto">
+      <p class="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-4">Proof of work</p>
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-10">The systems I've shipped</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-7 hover:border-[#f97316]/25 transition-colors">
+          <p class="text-[#f97316] font-mono text-sm mb-3">Sentinel</p>
+          <h3 class="text-white font-semibold mb-3">Daily monitoring for 24 active clients</h3>
+          <p class="text-[#64748b] text-sm leading-relaxed">Automated daily brief delivered to Slack — ranking movements, technical flags, and content opportunities. Catches problems before clients do.</p>
+        </div>
+        <div class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-7 hover:border-[#f97316]/25 transition-colors">
+          <p class="text-[#f97316] font-mono text-sm mb-3">Content Pipeline</p>
+          <h3 class="text-white font-semibold mb-3">38-file system with two-gate review</h3>
+          <p class="text-[#64748b] text-sm leading-relaxed">Keyword-mapped topics → structured briefs → Gate 1 humanization → Gate 2 optimization → internal linking → Google Docs delivery. Runs every month without starting over.</p>
+        </div>
+        <div class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-7 hover:border-[#f97316]/25 transition-colors">
+          <p class="text-[#f97316] font-mono text-sm mb-3">Schema Package</p>
+          <h3 class="text-white font-semibold mb-3">9-file JSON-LD delivered per engagement</h3>
+          <p class="text-[#64748b] text-sm leading-relaxed">FAQ, Article, Organization, LocalBusiness, Service, BreadcrumbList — validated against Google's Rich Results tool and handed off with WordPress PHP implementation files.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-6 pb-24">
+    <div class="max-w-6xl mx-auto">
+      <div class="relative bg-[#0f0f1a] border border-[#1e1e30] rounded-3xl px-8 md:px-20 py-16 text-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#f97316]/6 via-transparent to-indigo-500/4 pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-[#f97316]/8 rounded-full blur-[60px] pointer-events-none"></div>
+        <div class="relative">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to build something that runs?</h2>
+          <p class="text-[#64748b] mb-8 max-w-md mx-auto">
+            Tell me what you're working on. I'll tell you honestly what it needs.
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 bg-[#f97316] hover:bg-[#ea6c0a] text-white font-semibold px-8 py-4 rounded-xl transition-colors"
+          >
+            Start the conversation
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M2 7h10M8 3l4 4-4 4" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
