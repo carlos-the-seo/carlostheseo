@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ServicesPanel from '../components/ServicesPanel';
 
 const services = [
   {
@@ -119,55 +120,10 @@ const services = [
     </div>
   </section>
 
-  <!-- Services list -->
+  <!-- Services panel -->
   <section class="px-6 pb-24">
-    <div class="max-w-6xl mx-auto space-y-6">
-      {services.map(({ id, icon, title, tagline, description, deliverables, bestFor }) => (
-        <div id={id} class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-8 md:p-10 hover:border-[#f97316]/20 transition-colors group">
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-            <!-- Left -->
-            <div class="lg:col-span-1">
-              <span class="text-2xl text-[#f97316]/60 font-mono group-hover:text-[#f97316] transition-colors mb-4 block">{icon}</span>
-              <h2 class="text-white font-bold text-xl mb-2">{title}</h2>
-              <p class="text-[#f97316] text-sm font-medium mb-4">{tagline}</p>
-              <p class="text-[#64748b] text-sm leading-relaxed mb-6">{description}</p>
-              <div class="bg-[#0a0a12] border border-[#1e1e30] rounded-xl p-4">
-                <p class="text-xs font-semibold text-[#334155] uppercase tracking-wider mb-2">Best for</p>
-                <p class="text-[#64748b] text-xs leading-relaxed">{bestFor}</p>
-              </div>
-            </div>
-
-            <!-- Right: Deliverables -->
-            <div class="lg:col-span-2">
-              <p class="text-xs font-semibold text-[#334155] uppercase tracking-wider mb-5">What's included</p>
-              <ul class="space-y-3">
-                {deliverables.map((item) => (
-                  <li class="flex items-start gap-3">
-                    <span class="mt-0.5 w-4 h-4 rounded-full bg-[#f97316]/10 flex items-center justify-center shrink-0">
-                      <span class="text-[#f97316] text-[9px]">✓</span>
-                    </span>
-                    <span class="text-[#94a3b8] text-sm leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div class="mt-8 pt-6 border-t border-[#1e1e30]">
-                <a
-                  href={`/contact?service=${encodeURIComponent(title)}`}
-                  class="inline-flex items-center gap-2 text-sm font-semibold text-[#f97316] hover:text-[#ea6c0a] transition-colors"
-                >
-                  Inquire about {title}
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M2 7h10M8 3l4 4-4 4" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      ))}
+    <div class="max-w-6xl mx-auto">
+      <ServicesPanel services={services} client:load />
     </div>
   </section>
 
