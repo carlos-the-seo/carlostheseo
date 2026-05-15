@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://carlosmorones.com/sitemap-index.xml

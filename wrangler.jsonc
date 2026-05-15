@@ -9,5 +9,11 @@
 	},
 	"observability": {
 		"enabled": true
+	},
+	"triggers": {
+		"custom_domains": [
+			"carlosmorones.com",
+			"www.carlosmorones.com"
+		]
 	}
 }
