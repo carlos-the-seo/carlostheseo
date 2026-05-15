@@ -51,7 +51,17 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://carlosmorones.com');
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-  </head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5BHLJGGER4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5BHLJGGER4');
+    </script>
+  
+</head>
   <body class="min-h-screen flex flex-col antialiased bg-[#08080f] text-[#e2e8f0]">
     <Nav />
     <main class="flex-1">
