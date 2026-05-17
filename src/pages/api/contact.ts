@@ -1,12 +1,11 @@
 import type { APIRoute } from 'astro';
+import { env as cfEnv } from 'cloudflare:workers';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
-    const runtime = (locals as any).runtime;
-    const env = runtime?.env ?? {};
-    const RESEND_API_KEY = env.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
+    const RESEND_API_KEY = (cfEnv as any).RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
 
     if (!RESEND_API_KEY) {
       return new Response(JSON.stringify({ error: 'Server misconfigured: no API key' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
