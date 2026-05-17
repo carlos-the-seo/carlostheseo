@@ -39,7 +39,7 @@ export default function ContactForm() {
       form.reset();
     } catch {
       setStatus('error');
-      setError('Something went wrong. Email me directly at seo@marketingempiregroup.com');
+      setError('Something went wrong. Email me directly at seo@carlosmorones.com');
     }
   }
 

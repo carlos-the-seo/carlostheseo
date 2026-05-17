@@ -42,7 +42,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     },
     body: JSON.stringify({
       from: 'carlosmorones.com <hello@carlosmorones.com>',
-      to: ['seo@marketingempiregroup.com'],
+      to: ['seo@carlosmorones.com'],
       reply_to: email,
       subject: `New inquiry from ${name}${service ? ` — ${service}` : ''}`,
       html,
