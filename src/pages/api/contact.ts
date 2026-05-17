@@ -50,7 +50,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
   });
 
   if (!res.ok) {
-    return new Response(JSON.stringify({ error: 'Failed to send' }), { status: 500 });
+    const resendError = await res.json().catch(() => ({}));
+    console.error('Resend error:', JSON.stringify(resendError));
+    return new Response(JSON.stringify({ error: 'Failed to send', detail: resendError }), { status: 500 });
   }
 
   return new Response(JSON.stringify({ ok: true }), { status: 200 });
