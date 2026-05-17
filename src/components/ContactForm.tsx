@@ -35,26 +35,11 @@ export default function ContactForm() {
       });
 
       if (!res.ok) throw new Error('Something went wrong.');
-      setStatus('success');
-      form.reset();
+      window.location.href = '/thank-you';
     } catch {
       setStatus('error');
       setError('Something went wrong. Email me directly at seo@carlosmorones.com');
     }
-  }
-
-  if (status === 'success') {
-    return (
-      <div className="bg-[#0f0f1a] border border-green-500/20 rounded-2xl p-10 text-center">
-        <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-5">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </div>
-        <h3 className="text-white font-semibold text-lg mb-2">Got it — I'll be in touch.</h3>
-        <p className="text-[#64748b] text-sm">Usually within 1 business day.</p>
-      </div>
-    );
   }
 
   return (
