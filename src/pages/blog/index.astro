@@ -1,0 +1,233 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTags = ['All', ...new Set(allPosts.flatMap(p => p.data.tags))];
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+const [featured, ...rest] = allPosts;
+---
+
+<Layout
+  title="Blog"
+  description="Field notes on SEO systems, AI pipelines, schema markup, and the infrastructure behind modern search. Written by Carlos Morones."
+>
+
+  <!-- Load editorial fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Hero -->
+  <section class="pt-36 pb-12 px-6 border-b border-[#1e1e30]">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div>
+          <p class="blog-mono text-xs text-[#f97316] uppercase tracking-[0.2em] mb-4">Field Notes</p>
+          <h1 class="blog-serif text-5xl md:text-7xl font-bold text-white leading-[0.95] tracking-tight">
+            The Stack
+          </h1>
+          <p class="mt-4 text-[#475569] text-sm max-w-sm leading-relaxed">
+            SEO systems, AI pipelines, schema markup, and the infrastructure behind modern search.
+          </p>
+        </div>
+        <div class="blog-mono text-xs text-[#334155] text-right hidden md:block">
+          <p>{allPosts.length} dispatch{allPosts.length !== 1 ? 'es' : ''}</p>
+          <p>by Carlos Morones</p>
+          <p>Temecula, CA</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {allPosts.length === 0 ? (
+    <!-- Empty state -->
+    <section class="px-6 py-32">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-lg">
+          <div class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-8 font-mono text-sm">
+            <p class="text-[#334155] mb-4">$ sentinel run --blog --status</p>
+            <p class="text-[#475569]">→ Scanning content directory...</p>
+            <p class="text-[#475569]">→ Posts found: <span class="text-[#f97316]">0</span></p>
+            <p class="text-[#475569] mt-4">→ First dispatch incoming.</p>
+            <p class="text-green-400 mt-2">// Check back soon.</p>
+          </div>
+          <p class="text-[#334155] text-sm mt-6">
+            In the meantime — <a href="/services" class="text-[#f97316] hover:underline">see how I work</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <div>
+      <!-- Tag filter -->
+      <section class="px-6 py-5 border-b border-[#1e1e30]">
+        <div class="max-w-6xl mx-auto flex items-center gap-2 flex-wrap">
+          {allTags.map((tag) => (
+            <button
+              data-tag={tag}
+              class:list={["tag-btn blog-mono text-xs px-3 py-1.5 rounded-full border transition-colors", tag === 'All' ? 'bg-[#f97316] border-[#f97316] text-white' : 'border-[#1e1e30] text-[#475569] hover:border-[#334155] hover:text-[#94a3b8]']}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <!-- Featured post -->
+      {featured && (
+        <section class="px-6 py-12 border-b border-[#1e1e30]">
+          <div class="max-w-6xl mx-auto">
+            <p class="blog-mono text-[10px] text-[#334155] uppercase tracking-[0.2em] mb-6">Latest dispatch</p>
+            <a
+              href={`/blog/${featured.id}`}
+              data-post-tags={featured.data.tags.join(',')}
+              class="post-item group block"
+            >
+              <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 items-start">
+                <div>
+                  <div class="flex items-center gap-3 mb-5">
+                    {featured.data.tags.map(tag => (
+                      <span class="blog-mono text-[10px] text-[#f97316] uppercase tracking-[0.15em] border border-[#f97316]/30 px-2 py-0.5 rounded">{tag}</span>
+                    ))}
+                  </div>
+                  <h2 class="blog-serif text-3xl md:text-5xl font-bold text-white leading-[1.05] mb-5 group-hover:text-[#f97316] transition-colors duration-300">
+                    {featured.data.title}
+                  </h2>
+                  <p class="text-[#64748b] text-base leading-relaxed max-w-2xl">{featured.data.description}</p>
+                </div>
+                <div class="lg:border-l lg:border-[#1e1e30] lg:pl-8 flex flex-col gap-4">
+                  <div>
+                    <p class="blog-mono text-[10px] text-[#334155] uppercase tracking-wider mb-1">Published</p>
+                    <p class="blog-mono text-sm text-[#64748b]">{formatDate(featured.data.date)}</p>
+                  </div>
+                  {featured.data.readingTime && (
+                    <div>
+                      <p class="blog-mono text-[10px] text-[#334155] uppercase tracking-wider mb-1">Read time</p>
+                      <p class="blog-mono text-sm text-[#64748b]">{featured.data.readingTime}</p>
+                    </div>
+                  )}
+                  <div class="mt-auto pt-4">
+                    <span class="inline-flex items-center gap-2 text-sm font-semibold text-[#f97316] group-hover:gap-3 transition-all duration-200">
+                      Read dispatch
+                      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M2 7h10M8 3l4 4-4 4" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+      )}
+
+      <!-- Post grid -->
+      {rest.length > 0 && (
+        <section class="px-6 py-12 pb-24">
+          <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1e1e30]" id="post-grid">
+              {rest.map((post, i) => (
+                <a
+                  href={`/blog/${post.id}`}
+                  data-post-tags={post.data.tags.join(',')}
+                  class="post-item group bg-[#08080f] p-7 hover:bg-[#0f0f1a] transition-colors"
+                >
+                  <div class="flex items-start justify-between mb-5">
+                    <div class="flex flex-wrap gap-2">
+                      {post.data.tags.map(tag => (
+                        <span class="blog-mono text-[10px] text-[#475569] uppercase tracking-wider">{tag}</span>
+                      ))}
+                    </div>
+                    <span class="blog-mono text-xs text-[#1e1e30] group-hover:text-[#f97316]/30 transition-colors shrink-0 ml-3">
+                      {String(i + 2).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 class="blog-serif text-xl font-semibold text-[#94a3b8] group-hover:text-white transition-colors leading-snug mb-3">
+                    {post.data.title}
+                  </h3>
+                  <p class="text-[#475569] text-xs leading-relaxed mb-6 line-clamp-2">{post.data.description}</p>
+                  <div class="flex items-center justify-between mt-auto">
+                    <span class="blog-mono text-[10px] text-[#334155]">{formatDate(post.data.date)}</span>
+                    {post.data.readingTime && (
+                      <span class="blog-mono text-[10px] text-[#334155]">{post.data.readingTime}</span>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </div>
+  )}
+
+  <!-- No results state (shown by JS when tag filter returns nothing) -->
+  <div id="no-results" class="hidden px-6 py-20 text-center">
+    <p class="blog-mono text-sm text-[#334155]">No dispatches tagged with that topic yet.</p>
+  </div>
+
+</Layout>
+
+<style>
+  .blog-serif { font-family: 'Fraunces', Georgia, serif; }
+  .blog-mono  { font-family: 'IBM Plex Mono', 'Courier New', monospace; }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Staggered fade-in for post cards */
+  .post-item {
+    animation: postReveal 0.4s ease both;
+  }
+  @keyframes postReveal {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+  const tagButtons = document.querySelectorAll<HTMLElement>('.tag-btn');
+  const postItems  = document.querySelectorAll<HTMLElement>('.post-item');
+  const noResults  = document.getElementById('no-results');
+
+  tagButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.dataset.tag ?? 'All';
+
+      // Update button states
+      tagButtons.forEach(b => {
+        const isActive = b.dataset.tag === selected;
+        b.dataset.active = isActive ? 'true' : 'false';
+        b.className = b.className
+          .replace(/bg-\[#f97316\]|border-\[#f97316\]|text-white|border-\[#1e1e30\]|text-\[#475569\]/g, '').trim();
+        if (isActive) {
+          b.classList.add('bg-[#f97316]', 'border-[#f97316]', 'text-white');
+        } else {
+          b.classList.add('border-[#1e1e30]', 'text-[#475569]');
+        }
+      });
+
+      // Show/hide posts
+      let visible = 0;
+      postItems.forEach(item => {
+        const tags = (item.dataset.postTags ?? '').split(',');
+        const show = selected === 'All' || tags.includes(selected);
+        (item as HTMLElement).style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      if (noResults) noResults.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>

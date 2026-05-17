@@ -1,0 +1,287 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const currentIndex = allPosts.findIndex(p => p.id === post.id);
+const nextPost = allPosts[currentIndex + 1] ?? null;
+const prevPost = allPosts[currentIndex - 1] ?? null;
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+>
+  <!-- Load editorial fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Article schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.data.title,
+    "description": post.data.description,
+    "datePublished": post.data.date.toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": "Carlos Morones",
+      "url": "https://carlosmorones.com/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Carlos Morones",
+      "url": "https://carlosmorones.com"
+    }
+  })} />
+
+  <main>
+    <!-- Post header -->
+    <header class="pt-36 pb-12 px-6 border-b border-[#1e1e30]">
+      <div class="max-w-3xl mx-auto">
+
+        <!-- Back link -->
+        <a href="/blog" class="inline-flex items-center gap-2 blog-mono text-[11px] text-[#334155] hover:text-[#f97316] transition-colors mb-10 group">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:-translate-x-0.5 transition-transform">
+            <path d="M12 7H2M6 3L2 7l4 4" />
+          </svg>
+          The Stack
+        </a>
+
+        <!-- Tags -->
+        <div class="flex items-center gap-2 mb-6">
+          {post.data.tags.map(tag => (
+            <span class="blog-mono text-[10px] text-[#f97316] uppercase tracking-[0.15em] border border-[#f97316]/30 px-2 py-0.5 rounded">{tag}</span>
+          ))}
+        </div>
+
+        <!-- Title -->
+        <h1 class="blog-serif text-4xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight mb-6">
+          {post.data.title}
+        </h1>
+
+        <!-- Description -->
+        <p class="text-[#64748b] text-lg leading-relaxed mb-10 max-w-2xl">
+          {post.data.description}
+        </p>
+
+        <!-- Meta row -->
+        <div class="flex items-center gap-6 pt-6 border-t border-[#1e1e30]">
+          <div class="flex items-center gap-3">
+            <img
+              src="/carlos-headshot.jpeg"
+              alt="Carlos Morones"
+              class="w-8 h-8 rounded-full object-cover grayscale opacity-80"
+            />
+            <span class="blog-mono text-xs text-[#475569]">Carlos Morones</span>
+          </div>
+          <span class="text-[#1e1e30]">·</span>
+          <span class="blog-mono text-xs text-[#475569]">{formatDate(post.data.date)}</span>
+          {post.data.readingTime && (
+            <>
+              <span class="text-[#1e1e30]">·</span>
+              <span class="blog-mono text-xs text-[#475569]">{post.data.readingTime}</span>
+            </>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <!-- Post body -->
+    <section class="px-6 py-14">
+      <div class="max-w-3xl mx-auto">
+        <div class="prose-post">
+          <Content />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="px-6 py-14 border-t border-[#1e1e30]">
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-[#0f0f1a] border border-[#1e1e30] rounded-2xl p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            <p class="blog-mono text-[10px] text-[#f97316] uppercase tracking-[0.2em] mb-2">Work with Carlos</p>
+            <p class="blog-serif text-2xl font-semibold text-white leading-snug">Want this infrastructure<br class="hidden md:block" /> for your business?</p>
+            <p class="text-[#475569] text-sm mt-2">Structured data, monitoring, content pipelines — done and maintained for you.</p>
+          </div>
+          <a
+            href="/contact"
+            class="shrink-0 inline-flex items-center gap-2 bg-[#f97316] hover:bg-[#ea6c0a] text-white text-sm font-semibold px-6 py-3 rounded-lg transition-colors"
+          >
+            Get in touch
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M2 7h10M8 3l4 4-4 4" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prev / Next navigation -->
+    {(prevPost || nextPost) && (
+      <section class="px-6 pb-24 border-t border-[#1e1e30]">
+        <div class="max-w-3xl mx-auto pt-10 grid grid-cols-1 md:grid-cols-2 gap-px bg-[#1e1e30]">
+          {prevPost ? (
+            <a href={`/blog/${prevPost.id}`} class="group bg-[#08080f] hover:bg-[#0f0f1a] transition-colors p-7">
+              <p class="blog-mono text-[10px] text-[#334155] uppercase tracking-wider mb-3 flex items-center gap-2">
+                <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 7H2M6 3L2 7l4 4" />
+                </svg>
+                Previous
+              </p>
+              <p class="blog-serif text-lg font-semibold text-[#64748b] group-hover:text-white transition-colors leading-snug">
+                {prevPost.data.title}
+              </p>
+            </a>
+          ) : <div class="bg-[#08080f]" />}
+
+          {nextPost ? (
+            <a href={`/blog/${nextPost.id}`} class="group bg-[#08080f] hover:bg-[#0f0f1a] transition-colors p-7 text-right">
+              <p class="blog-mono text-[10px] text-[#334155] uppercase tracking-wider mb-3 flex items-center justify-end gap-2">
+                Next
+                <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M2 7h10M8 3l4 4-4 4" />
+                </svg>
+              </p>
+              <p class="blog-serif text-lg font-semibold text-[#64748b] group-hover:text-white transition-colors leading-snug">
+                {nextPost.data.title}
+              </p>
+            </a>
+          ) : <div class="bg-[#08080f]" />}
+        </div>
+      </section>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .blog-serif { font-family: 'Fraunces', Georgia, serif; }
+  .blog-mono  { font-family: 'IBM Plex Mono', 'Courier New', monospace; }
+
+  /* ── Prose styles for markdown content ─────────────────────── */
+  .prose-post {
+    color: #94a3b8;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  .prose-post h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    line-height: 1.2;
+    margin-top: 2.5rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .prose-post h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-top: 2rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .prose-post p {
+    margin-bottom: 1.375rem;
+  }
+
+  .prose-post strong {
+    color: #e2e8f0;
+    font-weight: 600;
+  }
+
+  .prose-post a {
+    color: #f97316;
+    text-decoration: underline;
+    text-decoration-color: #f97316/40;
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+  .prose-post a:hover { color: #fb923c; }
+
+  .prose-post ul,
+  .prose-post ol {
+    margin-bottom: 1.375rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose-post ul { list-style-type: disc; }
+  .prose-post ol { list-style-type: decimal; }
+
+  .prose-post li {
+    margin-bottom: 0.375rem;
+  }
+
+  .prose-post li::marker {
+    color: #f97316;
+  }
+
+  .prose-post blockquote {
+    border-left: 2px solid #f97316;
+    padding-left: 1.25rem;
+    margin: 1.75rem 0;
+    color: #64748b;
+    font-style: italic;
+  }
+
+  .prose-post code {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.85em;
+    background: #0f0f1a;
+    border: 1px solid #1e1e30;
+    color: #f97316;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+
+  .prose-post pre {
+    background: #0f0f1a;
+    border: 1px solid #1e1e30;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.75rem 0;
+  }
+
+  .prose-post pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #94a3b8;
+    font-size: 0.875rem;
+  }
+
+  .prose-post hr {
+    border: none;
+    border-top: 1px solid #1e1e30;
+    margin: 2.5rem 0;
+  }
+
+  /* First paragraph lead style */
+  .prose-post > p:first-of-type {
+    font-size: 1.125rem;
+    color: #cbd5e1;
+  }
+</style>
