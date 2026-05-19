@@ -176,7 +176,10 @@ const prevPost = allPosts[currentIndex - 1] ?? null;
 <style>
   .blog-serif { font-family: 'Fraunces', Georgia, serif; }
   .blog-mono  { font-family: 'IBM Plex Mono', 'Courier New', monospace; }
+</style>
 
+<!-- Prose styles must be global — <Content /> rendered markdown has no Astro scope attr -->
+<style is:global>
   /* ── Prose styles for markdown content ─────────────────────── */
   .prose-post {
     color: #94a3b8;
