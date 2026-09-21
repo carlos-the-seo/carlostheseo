@@ -47,7 +47,6 @@ const [featured, ...rest] = allPosts;
   </section>
 
   {allPosts.length === 0 ? (
-    <!-- Empty state -->
     <section class="px-6 py-32">
       <div class="max-w-6xl mx-auto">
         <div class="max-w-lg">
@@ -66,7 +65,7 @@ const [featured, ...rest] = allPosts;
     </section>
   ) : (
     <div>
-      <!-- Tag filter -->
+      {/* Tag filter */}
       <section class="px-6 py-5 border-b border-[#1e1e30]">
         <div class="max-w-6xl mx-auto flex items-center gap-2 flex-wrap">
           {allTags.map((tag) => (
@@ -80,7 +79,7 @@ const [featured, ...rest] = allPosts;
         </div>
       </section>
 
-      <!-- Featured post -->
+      {/* Featured post */}
       {featured && (
         <section class="px-6 py-12 border-b border-[#1e1e30]">
           <div class="max-w-6xl mx-auto">
@@ -128,7 +127,7 @@ const [featured, ...rest] = allPosts;
         </section>
       )}
 
-      <!-- Post grid -->
+      {/* Post grid */}
       {rest.length > 0 && (
         <section class="px-6 py-12 pb-24">
           <div class="max-w-6xl mx-auto">
