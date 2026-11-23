@@ -18,9 +18,9 @@ const year = new Date().getFullYear();
         <p class="text-xs font-semibold text-[#64748b] uppercase tracking-wider mb-4">Work</p>
         <ul class="space-y-3">
           {[
-            { label: 'Services', href: '/services' },
-            { label: 'Tools', href: '/tools' },
-            { label: 'Case Studies', href: '/case-studies' },
+            { label: 'Services', href: '/#services' },
+            { label: 'Work', href: '/#work' },
+            { label: 'About', href: '/#about' },
           ].map(({ label, href }) => (
             <li>
               <a href={href} class="text-sm text-[#64748b] hover:text-white transition-colors">{label}</a>
@@ -33,8 +33,8 @@ const year = new Date().getFullYear();
         <p class="text-xs font-semibold text-[#64748b] uppercase tracking-wider mb-4">Connect</p>
         <ul class="space-y-3">
           {[
-            { label: 'Blog', href: '/blog' },
-            { label: 'Contact', href: '/contact' },
+            { label: 'Blog', href: '/blog/' },
+            { label: 'Contact', href: '/#contact' },
             { label: 'LinkedIn', href: 'https://www.linkedin.com/in/carlos-morones/', external: true },
           ].map(({ label, href, external }) => (
             <li>
