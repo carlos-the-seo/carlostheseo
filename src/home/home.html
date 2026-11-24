@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>html,body{background:#0b0b0a;color:#f3efe7}body{margin:0;font-family:system-ui,-apple-system,sans-serif}.cursor,.curtain,.grain{display:none}</style>
-<link rel="stylesheet" href="/assets/site.v3.css?v=3">
+<link rel="stylesheet" href="/assets/site.v4.css?v=4">
 <script>(function(h){h.className='js';setTimeout(function(){if(!window.__cmReady){h.className='is-ready'}},3500)})(document.documentElement)</script>
 </head>
 <body>
@@ -52,7 +52,6 @@
     </a>
     <nav class="nav__links" aria-label="Main">
       <a href="#services"><span>Services</span></a>
-      <a href="#work"><span>Work</span></a>
       <a href="#local"><span>Local</span></a>
       <a href="#about"><span>About</span></a>
       <a href="#notes"><span>Notes</span></a>
@@ -63,7 +62,6 @@
   </div>
   <div class="menu" id="menu" hidden>
     <a href="#services">Services</a>
-    <a href="#work">Work</a>
     <a href="#local">Local</a>
     <a href="#about">About</a>
     <a href="#notes">Notes</a>
@@ -183,71 +181,11 @@
   </div>
 </section>
 
-<!-- WORK -->
-<section class="work" id="work">
-  <div class="wrap">
-    <div class="head head--row">
-      <div>
-        <p class="label"><span>03</span>Recent builds</p>
-        <h2 class="h2 reveal">Fresh off <em>the desk.</em></h2>
-      </div>
-      <p class="head__note reveal">Concept builds. I designed these for real local businesses to show them what their site could look like. They're demos, not paid client work. Click through, they're live.</p>
-    </div>
-
-    <div class="builds">
-      <a class="build reveal" href="https://rosales-nursery-demo.pages.dev" target="_blank" rel="noopener">
-        <div class="build__media">
-          <div class="build__chrome" aria-hidden="true"><i></i><i></i><i></i><span>rosales-nursery-demo.pages.dev</span></div>
-          <img src="/assets/work-rosales-720.webp" srcset="/assets/work-rosales-720.webp 720w, /assets/work-rosales.webp 1200w" sizes="(max-width: 760px) 92vw, 46vw" width="1200" height="750" alt="Homepage of the Rosales Nursery concept site" loading="lazy">
-        </div>
-        <div class="build__meta">
-          <span class="build__tag">Concept build</span>
-          <h3>Rosales Nursery</h3>
-          <p>Plant nursery / Long Beach, CA</p>
-        </div>
-      </a>
-      <a class="build reveal" href="https://lc-painting-demo.pages.dev" target="_blank" rel="noopener">
-        <div class="build__media">
-          <div class="build__chrome" aria-hidden="true"><i></i><i></i><i></i><span>lc-painting-demo.pages.dev</span></div>
-          <img src="/assets/work-lc-720.webp" srcset="/assets/work-lc-720.webp 720w, /assets/work-lc.webp 1200w" sizes="(max-width: 760px) 92vw, 46vw" width="1200" height="750" alt="Homepage of the LC Painting concept site" loading="lazy">
-        </div>
-        <div class="build__meta">
-          <span class="build__tag">Concept build</span>
-          <h3>LC Painting</h3>
-          <p>House painting / Menifee, CA</p>
-        </div>
-      </a>
-      <a class="build reveal" href="https://petes-sportsmen-demo.pages.dev" target="_blank" rel="noopener">
-        <div class="build__media">
-          <div class="build__chrome" aria-hidden="true"><i></i><i></i><i></i><span>petes-sportsmen-demo.pages.dev</span></div>
-          <img src="/assets/work-petes-720.webp" srcset="/assets/work-petes-720.webp 720w, /assets/work-petes.webp 1200w" sizes="(max-width: 760px) 92vw, 46vw" width="1200" height="750" alt="Homepage of the Pete's Sportsmens Bar and Grill concept site" loading="lazy">
-        </div>
-        <div class="build__meta">
-          <span class="build__tag">Concept build</span>
-          <h3>Pete's Sportsmens</h3>
-          <p>Bar and grill / Bridgeport, CA</p>
-        </div>
-      </a>
-      <a class="build reveal" href="https://thrivemed-demo.pages.dev" target="_blank" rel="noopener">
-        <div class="build__media">
-          <div class="build__chrome" aria-hidden="true"><i></i><i></i><i></i><span>thrivemed-demo.pages.dev</span></div>
-          <img src="/assets/work-thrivemed-720.webp" srcset="/assets/work-thrivemed-720.webp 720w, /assets/work-thrivemed.webp 1200w" sizes="(max-width: 760px) 92vw, 46vw" width="1200" height="750" alt="Homepage of the ThriveMed redesign concept" loading="lazy">
-        </div>
-        <div class="build__meta">
-          <span class="build__tag">Redesign concept</span>
-          <h3>ThriveMed</h3>
-          <p>Precision health practice / Mesa, AZ</p>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- SYSTEMS -->
-<section class="systems">
+<section class="systems" id="systems">
   <div class="wrap">
     <div class="head">
-      <p class="label"><span>04</span>Systems I've built</p>
+      <p class="label"><span>03</span>Systems I've built</p>
       <h2 class="h2 reveal">The machinery <em>behind the work.</em></h2>
       <p class="head__sub reveal">I don't just recommend tools. I build the systems and run them on real client accounts.</p>
     </div>
@@ -287,11 +225,6 @@
         <h3>SEO Ops Center</h3>
         <p>A web app I designed and built for running day-to-day SEO operations. Less busywork, fewer things slipping through.</p>
       </article>
-      <article class="sys__card sys__card--soon reveal">
-        <p class="sys__tag">Client case studies</p>
-        <h3>Coming soon</h3>
-        <p>I'm writing up recent builds with the owners' permission. Want to see examples now? Ask and I'll send a few.</p>
-      </article>
     </div>
   </div>
 </section>
@@ -301,7 +234,7 @@
   <div class="wrap">
     <div class="local__grid">
       <div class="local__copy">
-        <p class="label"><span>05</span>For local businesses</p>
+        <p class="label"><span>04</span>For local businesses</p>
         <h2 class="h2 reveal">Your customers are searching. <em>Give them somewhere to land.</em></h2>
         <p class="reveal">A lot of the local businesses I talk to run on Instagram and word of mouth. That works with people who already know you. But when someone new searches Google for what you do, they pick the business that looks real. Usually that means a website.</p>
         <p class="reveal">I build those sites for gardeners, barbers, food trucks, shops, and crews. Simple, fast, fairly priced, and yours.</p>
@@ -337,7 +270,7 @@
       <span class="about__cap">Carlos Morones<br>Temecula, CA</span>
     </div>
     <div class="about__copy">
-      <p class="label"><span>06</span>About</p>
+      <p class="label"><span>05</span>About</p>
       <h2 class="h2 reveal">I started out <em>editing commercials.</em></h2>
       <p class="reveal about__big">In high school I was cutting video, commercials, and graphics. That's where I learned the thing a lot of marketers miss: if it doesn't communicate clearly, it doesn't work.</p>
       <p class="reveal">Since then I've done freelance, in-house, and agency work. Social, paid ads, video, web, ecommerce, and a lot of SEO. Now I work for myself, and every project gets the same rule: build it so it keeps working after I'm done.</p>
@@ -360,7 +293,7 @@
 <section class="how">
   <div class="wrap">
     <div class="head">
-      <p class="label"><span>07</span>How I work</p>
+      <p class="label"><span>06</span>How I work</p>
       <h2 class="h2 reveal">No sales team. <em>Just me.</em></h2>
     </div>
     <div class="how__grid">
@@ -393,7 +326,7 @@
   <div class="wrap">
     <div class="head head--row">
       <div>
-        <p class="label"><span>08</span>Notes</p>
+        <p class="label"><span>07</span>Notes</p>
         <h2 class="h2 reveal">Writing about <em>what works.</em></h2>
       </div>
       <a href="/blog/" class="link reveal">All notes <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -422,7 +355,7 @@
 <section class="contact" id="contact">
   <div class="contact__fx" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="label"><span>09</span>Contact</p>
+    <p class="label"><span>08</span>Contact</p>
     <h2 class="contact__big"><span data-split>Let's</span> <span data-split class="o">talk.</span></h2>
     <div class="contact__grid">
       <div class="contact__copy reveal">

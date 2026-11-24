@@ -14,8 +14,8 @@ export default defineConfig({
     '/about': { status: 301, destination: '/#about' },
     '/services': { status: 301, destination: '/#services' },
     '/contact': { status: 301, destination: '/#contact' },
-    '/tools': { status: 301, destination: '/#work' },
-    '/case-studies': { status: 301, destination: '/#work' },
+    '/tools': { status: 301, destination: '/#systems' },
+    '/case-studies': { status: 301, destination: '/#systems' },
   },
   integrations: [react(), sitemap({ filter: (page) => !page.includes('/thank-you') })],
 

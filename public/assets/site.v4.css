@@ -212,7 +212,7 @@ section{position:relative}
 
 /* systems */
 .systems{padding:clamp(90px,12vw,170px) 0}
-.sys{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.sys{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .sys__card{position:relative;padding:30px;border:1px solid var(--line);border-radius:18px;background:var(--bg2);overflow:hidden;transition:border-color .4s,transform .6s var(--ease)}
 .sys__card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--cx,50%) var(--cy,0%),rgba(255,74,28,.14),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
 .sys__card:hover{border-color:rgba(255,74,28,.45);transform:translateY(-4px)}
