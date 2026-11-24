@@ -1,10 +1,8 @@
 ---
 const navLinks = [
-  { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Tools', href: '/tools' },
-  { label: 'Case Studies', href: '/case-studies' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Services', href: '/#services' },
+  { label: 'About', href: '/#about' },
+  { label: 'Blog', href: '/blog/' },
 ];
 
 const pathname = Astro.url.pathname;
@@ -32,7 +30,7 @@ const pathname = Astro.url.pathname;
     </nav>
 
     <a
-      href="/contact"
+      href="/#contact"
       class="hidden md:inline-flex items-center gap-2 bg-[#f97316] hover:bg-[#ea6c0a] text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
     >
       Work With Me
@@ -59,7 +57,7 @@ const pathname = Astro.url.pathname;
         {label}
       </a>
     ))}
-    <a href="/contact" class="inline-flex justify-center bg-[#f97316] text-white text-sm font-semibold px-4 py-2 rounded-lg">
+    <a href="/#contact" class="inline-flex justify-center bg-[#f97316] text-white text-sm font-semibold px-4 py-2 rounded-lg">
       Work With Me
     </a>
   </div>
