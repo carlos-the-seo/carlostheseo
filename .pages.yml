@@ -1,0 +1,65 @@
+# Pages CMS config (https://pagescms.org/docs/configuration/)
+# Edit at https://app.pagescms.org. Every save commits to the selected branch;
+# saving on main triggers a Cloudflare Workers Build and goes live in a few minutes.
+
+media:
+  input: public/images/blog
+  output: /images/blog
+  categories: [image]
+  rename: safe
+
+content:
+  - name: blog
+    label: Blog posts
+    type: collection
+    path: src/content/blog
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: title
+      fields: [title, date, draft]
+      sort: [date, title]
+      search: [title, description]
+      default:
+        sort: date
+        order: desc
+    # Mirrors the Zod schema in src/content.config.ts
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+        required: true
+        description: One or two sentences. Used as the meta description and on the blog list.
+      - name: date
+        label: Publish date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+        description: "Existing tags: AI SEO, Content, Systems, Schema, Technical SEO"
+      - name: readingTime
+        label: Reading time
+        type: string
+        description: 'Optional, e.g. "8 min read"'
+      - name: draft
+        label: Draft (hidden from the site)
+        type: boolean
+        default: false
+      - name: body
+        label: Body
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+          rename: safe
